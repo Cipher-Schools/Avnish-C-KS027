@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+
+void dfs(int n, string ans = ""){
+    if(n < 0){
+        return ;
+    }
+    if(n == 0){
+        cout <<  ans << endl;
+        return ;
+    }
+    dfs(n - 1, ans + "1, ");
+    dfs(n - 2, ans + "2, ");
+    dfs(n - 5, ans + "5, ");
+}
+
+int main(){
+    
+    int n = 5;
+    dfs(n);
+    return 0;
+}
+
+
+int ans = INT_MIN;
+    for(int sp = 0; sp < n; sp++){
+        int sumForCurSubArray = 0;
+        for(int ep = sp; ep < n; ep++){
+            sumForCurSubArray += arr[ep];
+        }
+        if(sumForCurSubArray > ans){
+            ans = sumForCurSubArray;
+        }
+    }
+
+
+    #include <stdio.h>
+#include <limits.h>
+int main(){
+    int n; 
+    printf("Enter your size : ");
+    scanf("%d", &n);
+    int arr[n];
+    for(int i = 0; i < n; i++){
+        scanf("%d", &arr[i]);
+    }
+    int ans = INT_MIN;
+    for(int sp = 0; sp < n; sp++){
+        int sumForCurSubArray = 0;
+        for(int ep = sp; ep < n; ep++){
+            sumForCurSubArray += arr[ep];
+        }
+        if(sumForCurSubArray > ans){
+            ans = sumForCurSubArray;
+        }
+    }
+    printf("%d", ans);
+    return 0;
+}
