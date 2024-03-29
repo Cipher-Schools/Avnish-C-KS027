@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+
+int main(){
+    int n = 17;
+    int i = 0;
+    int offNo = n & (~(1 << i));
+    printf("%d", offNo);
+    return 0;
+}
+
+
+vector<int> findTwoElement(vector<int> arr, int n) {
+        int count[n + 1];
+        for(int i = 0; i < n; i++){
+            count[i] = 0;
+        }
+        for(int i = 0; i < n; i++){
+            int curEle = arr[i];
+            count[curEle]++;
+        }
+        int missing = 0;
+        int repeated = 0;
+        for(int i = 1; i <= n; i++){
+            if(count[i] == 0){
+                missing = i;
+            }else if(count[i] == 2){
+                repeated = i;
+            }
+        }
+        return {repeated, missing};
+    }
