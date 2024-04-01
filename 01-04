@@ -1,0 +1,60 @@
+int getLength(){
+    int len = 0;
+    Node* cur = head;
+    while(cur != NULL){
+        cur = cur->next;
+        len++;
+    }
+    return len;
+}
+
+int insert(int data, int index){
+    int curLen = getLength(head);
+    if(index < 0 || index > curLen){
+        return 0; // false 
+    }
+    Node* newNode = (Node*)(malloc sizeof(Node)));
+    newNode->data = data;
+    newNode->next = NULL;
+    if(head == NULL || index == 0){
+        newNode->next = head;
+        head = newNode;
+        return 1;
+    }
+    Node* cur = head;
+    while(index - 1 > 0){
+        cur = cur->next; B C D
+        index--;
+    }
+    newNode->next = cur->next;
+    cur->next = newNode;
+    return 1;
+}
+
+
+int delete(int index){
+    int curLen = getLength(head); // 1
+    if(index < 0 || index > curLen){
+        return 0; // false 
+    }
+    if(head == NULL){
+        return 0;
+    }
+    else if(index == 0){
+        Node* cur = head;
+        free(cur);
+        head = head->next;
+        return 1;
+    }
+    Node* cur = head;
+    while(index - 1 > 0){ 
+        cur = cur->next; 
+        index--;
+    }
+    A->B->C->D->NULL; // 1
+    Node* t = cur->next;
+        free(t);
+        cur->next = cur->next->next;
+    }
+    return 1;
+}
