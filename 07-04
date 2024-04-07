@@ -1,0 +1,113 @@
+Node* head;
+void Print(){
+    Node* copy = head;
+    if(copy == NULL){
+        printf("NULL");
+        return ;
+    }
+    while(copy->next != head){
+        printf("%d->", copy->data);
+        copy = copy->next;
+    }
+    printf("%d->", copy->data);
+    printf("%d\n", head->data);
+    return;
+}
+int GetLength(){
+    Node* copy = head;
+    if(copy == NULL){
+        printf("NULL");
+        return 0;
+    }
+    int len = 0;
+    while(copy->next != head){
+        len++;
+        copy = copy->next;
+    }
+    len++;
+    return len;
+}
+Node* GetLast(){
+    Node* copy = head;
+    if(copy == NULL){
+        printf("NULL");
+        return NULL;
+    }
+    while(copy->next != head){
+        printf("%d->", copy->data);
+        copy = copy->next;
+    }
+    return copy;
+}
+Node* Search(int target){
+    Node* copy = head; // A
+    if(copy == NULL){
+        printf("NULL");
+        return NULL;
+    }
+    //A->A
+    while(copy->next != head){ // A != A
+        if(copy->data == target){
+            return copy;
+        }
+        copy = copy->next;
+    }
+    return (copy->data == target ? copy : NULL);
+}
+int Insert(int data, int position){
+    int len = GetLength();
+    if(position < 0 or position > len){
+        return 0;
+    }
+    Node* newNode = (Node*)(malloc(sizeof(Node*)));
+    newNode->data = data;
+    newNode->next = NULL;
+    if(head == NULL){
+        head = newNode;
+        newNode->next = newNode;
+        return 1;
+    }
+    else if(position == 0){
+        newNode->next = head;
+        head = newNode;
+        Node* lastNode = GetLast();
+        lastNode->next = newNode;
+        return 1;
+    }
+    Node* copy = head;
+    while(position - 1 > 0){
+        copy = copy->next;
+        position--;
+    }
+    newNode->next = copy->next;
+    copy->next = newNode;
+    return 1;
+}
+int Delete(int position){
+    int len = GetLength();
+    if(position < 0 or position >= len){
+        return 0;
+    }
+    if(head == NULL){   
+        return 0;
+    }
+    else if(position == 0){
+        Node* toBeDeleted = head;
+        head = (head == head->next ? NULL : head->next);
+        Node* lastNode = GetLast();
+        if(lastNode != NULL){
+            lastNode->next = head;
+        }
+        free(toBeDeleted);
+        return 1;
+    }
+    Node* copy = head;
+    while(position - 1 > 0){
+        copy = copy->next;
+        position--;
+    }
+    Node* toBeDeleted = copy->next;
+    copy->next = copy->next->next;
+    free(toBeDeleted);
+    return 1;
+}
