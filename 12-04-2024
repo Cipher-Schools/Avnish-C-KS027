@@ -1,0 +1,21 @@
+//User function template for C++
+class Solution{
+public:
+	
+	long long sumBitDifferences(int arr[], int n) {
+	    long long ans =  0;
+	    for(int i = 0; i <= 31; i++){
+	        long long on = 0;
+	        long long off = 0;
+	        for(int j = 0; j < n; j++){
+	            int ele = arr[j];
+	            if((ele >> i) & 1){
+	                on++;
+	            }
+	        }
+	        off = (n - on);
+	        ans += (on * off * 2);
+	    }
+	    return ans;
+	}
+};
