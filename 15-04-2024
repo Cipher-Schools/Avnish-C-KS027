@@ -1,0 +1,40 @@
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+};
+
+
+class Solution {
+public:
+    void reverse(ListNode* head, ListNode*& last){
+        if(head == NULL){
+            return ;
+        }
+        reverse(head->next, last);
+        if(head and !head->next){
+            last = head;
+        }
+        else{
+            head->next->next = head;
+        }
+        
+    }
+    ListNode* reverseList(ListNode* head) {
+       ListNode* cur = head;
+        ListNode* lastNode = head;
+        reverse(head, lastNode);
+        if(head){
+            head->next = NULL;
+        }
+        head = lastNode;
+        return head;
+    }
+};
