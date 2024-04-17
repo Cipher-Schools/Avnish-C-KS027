@@ -1,0 +1,72 @@
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        if(head == NULL){
+           return head;
+       } 
+        ListNode* cur = head;
+        while(cur->next != NULL){
+            if(cur->next->val == val){
+                cur->next = cur->next->next;
+            }
+            else{
+                cur = cur->next;
+            }
+        }
+    }
+};
+
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast != NULL and fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast){
+                return 1;
+            }
+        }
+        return 0;
+    }
+};
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* curr= head;
+        while(curr and curr->next){
+            if(curr->val==curr->next->val){
+                curr->next=curr->next->next;
+            }
+            else{
+                curr=curr->next;
+            }
+        }
+        return head;
+    }
+};
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode* startNode = NULL;
+        if(l1 == NULL){
+            return l2;
+        }
+        if(l2 == NULL){
+            return l1;
+        }       
+        
+        if(l1->val <= l2->val){
+            startNode = l1;
+            startNode->next = mergeTwoLists(l1->next, l2);
+        }
+        else{
+            startNode = l2;
+            startNode->next = mergeTwoLists(l1, l2->next);
+        }
+        return startNode;
+    }
+};
