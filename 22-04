@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    char* str = "codetantra";
+    int mask = 0;
+    for(int i = 0; i < 10; i++){
+        int bit = (str[i] - 'a');
+        mask |= (1 << bit);
+    }
+    for(int i = 0; i < 1; i++){
+        char ch = 't';
+        int temp = (1 << (ch - 'a'));
+        if(mask & temp){
+            printf("yes");
+        }
+        else{
+            printf("no");
+        }
+    }
+    return 0;
+}
