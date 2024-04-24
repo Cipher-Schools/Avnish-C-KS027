@@ -1,0 +1,103 @@
+bool ispar(string x){
+        if(x.length() & 1){
+            return false;
+        }
+        stack<char> s;
+        for(int i = 0; i < x.length(); i++){
+            if(x[i] == '(' or x[i] == '{' or x[i] == '['){
+                s.push(x[i]);
+            }
+            else{
+                if(s.empty()){
+                    return false;
+                }
+                char top = s.top();
+                s.pop();
+                if(x[i] == ')' and top == '('){
+                    
+                }
+                else if(x[i] == '}' and top == '{'){
+                    
+                }
+                else if(x[i] == ']' and top == '['){
+                    
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        if(s.size() != 0){
+            return false;
+        }
+        return true;
+    }
+
+
+
+#include <stdio.h>
+int top = -1;
+void printMenu(){
+    printf("1-Push");
+    printf("\n2-Pop");
+    printf("\n3-Peek");
+    printf("\n0-Exit");
+}
+int peek(int stack[]){
+    if(top == -1){
+        printf("Stack is Empty cannot read\n");
+        return -1;
+    }
+    return stack[top];
+}
+int pop(int stack[]){
+    if(top == -1){
+        printf("Cannot delete since its underflow\n");
+        return -1;
+    }
+    return stack[top--];
+}
+int push(int stack[], int newData, int N){
+    if(top == N - 1){
+        printf("Cannot add data since its overflow\n");
+        return 0;
+    }
+    stack[++top] = newData;
+    return 1;
+}
+int main(){
+    int n;
+    scanf("%d", &n);
+    int stack[n];
+    int choice = -1;
+    while(choice != 0){
+        printMenu(); scanf("%d", &choice);
+        int response;
+        switch(choice){
+            case 0:
+                break;
+            case 1:
+                printf("\nEnter Data Value : ");
+                int d; scanf("%d", &d);
+                response = push(stack, d, n);
+                break;
+            case 2:
+                response = pop(stack);
+                if(response != -1){
+                    printf("\nRemoved Element = %d", response);
+                }
+                break;
+            case 3:
+                response = peek(stack);
+                if(response != -1){
+                    printf("\nTop Element = %d", response);
+                }
+                break;
+            default : 
+                printf("Kind;y enter the valid Choice");
+                break;
+        }
+    }
+    printf("\nBye");
+    return 0;
+}
