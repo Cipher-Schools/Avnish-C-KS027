@@ -1,0 +1,64 @@
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int low =  1;
+        int high = 1e9;
+        while(low < high){
+            int mid = (low + high) >> 1;
+            int sum = 0;
+            for(int i = 0; i < piles.size(); i++){
+                sum += (piles[i] / mid);
+                if(piles[i] % mid != 0){
+                    sum++;
+                }
+            }
+            if(sum > h){
+                low = mid + 1;
+            }
+            else{
+                high = mid;
+            }
+        }
+        return high;
+    }
+};
+
+class Solution {
+public:
+    bool check(vector<int>& weights, int mid, int days){
+        int sum = 0;
+        int d = 1;
+        for(int i = 0; i < weights.size(); i++){
+            sum += weights[i];
+            if(sum > mid){
+                d++; 
+                sum = weights[i];
+            }
+        }
+        if(d <= days){
+            return 1;
+        }
+        return 0;
+    }
+    int shipWithinDays(vector<int>& weights, int days) {
+        int low = 0, high = 0;
+        int n = weights.size();
+        for(int i = 0; i < n; i++){
+            low = max(low, weights[i]);
+            high += weights[i];
+        }
+        int ans = 0;
+        while(low <= high){
+            int mid = (low + high) / 2;
+            bool possible = check(weights, mid, days);
+            if(possible){
+                ans = mid;
+                high = mid - 1;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+};
