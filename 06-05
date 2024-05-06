@@ -1,0 +1,127 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& arr, int target) {
+        int n = arr.size();
+        int m = arr[0].size();
+        int low = 0;
+        int high = (n * m) - 1;
+        while(low <= high){
+            int mid = (low + high) / 2;
+            int row = mid / m;
+            int col = mid % m;
+            if(arr[row][col] == target){
+                return true;
+            }
+            else if(arr[row][col] < target){
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
+            }
+        }
+        return false;
+    }
+};
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& arr, int target) {
+        int n = arr.size();
+        int m = arr[0].size();
+        int row = 0;
+        int col = m - 1;
+        while(row <= n - 1 and col >= 0){
+            if(arr[row][col] == target){
+                return true;
+            }
+            else if(arr[row][col] < target){
+                row++;
+            }
+            else{
+                col--;
+            }
+        }
+        return false;
+    }
+};
+
+
+
+class Solution {
+public:
+    int check(vector<int>& arr, int mid, int k){
+        int cow = 1;
+        int lastCowPos = arr[0];
+        for(int i = 1; i < arr.size(); i++){
+            int curpos = arr[i];
+            if(curpos - lastCowPos >= mid){
+                cow++;
+                lastCowPos = arr[i];
+            }
+            if(cow == k){
+                return 1;
+            }
+        }
+        return 0;
+    }
+    int solve(int n, int k, vector<int> &arr) {
+        sort(arr.begin(), arr.end());
+        int low = INT_MAX;
+        for(int i = 1; i < n; i++){
+            int dif = arr[i] - arr[i - 1];
+            low = min(low, dif);
+        }
+        int high = arr[n - 1] - arr[0];
+        int ans = 0;
+        while(low <= high){
+            int mid = (high - ((high - low) >> 1));
+            int possible = check(arr, mid, k);
+            if(possible == 1){
+                ans = mid;
+                low = mid + 1;
+            }
+            else{
+                high = mid  - 1;
+            }
+        }
+        return ans;
+    }
+};
+
+
+class Solution {
+public:
+    int check(vector<int>& arr, int mid, int k){
+        int cow = 1;
+        int lastCowPos = arr[0];
+        for(int i = 1; i < arr.size(); i++){
+            int curpos = arr[i];
+            if(curpos - lastCowPos >= mid){
+                cow++;
+                lastCowPos = arr[i];
+            }
+            if(cow == k){
+                return 1;
+            }
+        }
+        return 0;
+    }
+    int solve(int n, int k, vector<int> &arr) {
+        sort(arr.begin(), arr.end());
+        int low = 1;
+        int high = arr[n - 1] - arr[0];
+        int ans = 0;
+        while(low <= high){
+            int mid = (high - ((high - low) >> 1));
+            int possible = check(arr, mid, k);
+            if(possible == 1){
+                ans = mid;
+                low = mid + 1;
+            }
+            else{
+                high = mid  - 1;
+            }
+        }
+        return ans;
+    }
+};
