@@ -1,0 +1,68 @@
+#include <stdio.h>
+int front = -1;
+int rear = -1;
+void enQueue(int arr[], int n, int newValue){
+    if(rear == n - 1){
+        printf("\nOverflow");
+        return ;
+    }
+    if(front == -1){
+        front = 0;
+    }
+    arr[++rear] = newValue;
+    printf("\nSuccess");
+    return ;
+}
+void deQueue(int arr[], int n){
+    if(front == -1){
+        printf("\nUnderflow");
+        return ;
+    }
+    if(front == rear && rear == 0){
+        front = -1;
+        rear = -1;
+        return ;
+    }
+    for(int i = front; i <= rear - 1; i++){
+        arr[i] = arr[i + 1];
+    }
+    rear--;
+    printf("\nSuccess");
+    return ;
+}
+void print(int arr[], int n){
+    for(int i = front; i <= rear && front != -1; i++){
+        printf("%d , ", arr[i]);
+    }
+    return ;
+}
+int main(){
+    int n; scanf("%d", &n);
+    int arr[n];
+    int choice = -1;
+    while(choice != 0){
+        printf("\n1-EnQueue");
+        printf("\n2-DeQueue");
+        printf("\n3-Print");
+        printf("\n0-Exit");
+        scanf("%d", &choice);
+        switch(choice){
+            case 0:
+                break;
+            case 1:
+                int data; printf("\nEnter your value : "); scanf("%d", &data);
+                enQueue(arr, n, data);
+                break;
+            case 2:
+                deQueue(arr, n);
+                break;
+            case 3:
+                print(arr, n);
+                break;
+            default:
+                printf("\nWrong Choice");
+                break;
+        }
+    }
+    return 0;
+}
